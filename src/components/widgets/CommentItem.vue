@@ -1,18 +1,18 @@
 <template>
     <div class="comment-item">
         <div class="header">
-            <img :src="'https://avatars.dicebear.com/api/micah/' + data.name + '.svg?mouth=smile&eyebrows=up'" alt="头像">
+            <img :src="'https://avatars.dicebear.com/api/micah/' + dataItem.name + '.svg?mouth=smile&eyebrows=up'" alt="头像">
         </div>
         <div class="bubble" />
         <div class="content">
-            <p>{{ data.content }}</p>
+            <p>{{ dataItem.content }}</p>
         </div>
     </div>
 </template>
 
 <script setup>
 
-defineProps(['data'])
+defineProps(['data-item'])
 
 </script>
 

@@ -1,10 +1,7 @@
 <template>
-  <div class="container">
-    <UserComment></UserComment>
-  </div>
+  happy new year
 </template>
 <script setup>
-import UserComment from "@/components/UserComment.vue"
 </script>
 <style>
 * {
