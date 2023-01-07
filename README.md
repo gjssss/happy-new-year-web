@@ -1,24 +1,5 @@
-# happy-new-year
+# 微信迎新年活动
 
-## Project setup
-```
-npm install
-```
+从微信公众号获取链接，根据用户祝福和用户昵称生成用户专属页面和专属头像
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+包括用户祝福、祝福图片、随机祝福、评论系统还有分享图片
