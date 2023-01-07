@@ -18,13 +18,14 @@ defineProps(['data'])
 
 <style scoped>
 .comment-item {
-    width: 90%;
+    width: 100%;
     margin: 10px 0;
+    display: flex;
 }
 
 .comment-item .header {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid white;
@@ -33,18 +34,20 @@ defineProps(['data'])
 
 .comment-item .content {
     background-color: #fff;
-    padding: 5px;
+    padding: 10px;
     border-radius: 20px;
+    max-width: 260px;
 }
 
 .comment-item .bubble {
     position: relative;
-    border-top: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid white;
-    border-left: 8px solid transparent;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid white;
+    border-left: 6px solid transparent;
     width: 0;
     height: 0;
-    left: 25px;
+    left: 2px;
+    top: 17px;
 }
 </style>
