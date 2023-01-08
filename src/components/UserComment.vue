@@ -3,6 +3,7 @@
         <CommentItem v-for="item in data" :key="item.id" :data-item="item"></CommentItem>
     </div>
 </template>
+
 <script setup>
 import CommentItem from "@/components/widgets/CommentItem.vue"
 defineProps(['data'])
