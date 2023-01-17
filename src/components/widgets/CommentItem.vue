@@ -1,7 +1,7 @@
 <template>
     <div class="comment-item">
         <div class="header">
-            <img :src="'https://avatars.dicebear.com/api/micah/' + dataItem.name + '.svg?mouth=smile&eyebrows=up'" alt="头像">
+            <img :src="generateAvator(dataItem.name)" alt="头像">
         </div>
         <div class="bubble" />
         <div class="content">
@@ -12,6 +12,7 @@
 
 <script setup>
 
+import { generateAvator } from "@/utils/avator.js"
 defineProps(['data-item'])
 
 </script>
