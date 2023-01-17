@@ -22,8 +22,7 @@ defineProps(['data'])
     padding: 10px 0;
 
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .25);
-    background: linear-gradient(315deg, #42d392 25%, #647eff);
-
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)
 }
 
 .item-container {

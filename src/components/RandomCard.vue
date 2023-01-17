@@ -2,13 +2,17 @@
     <div>
         <RandomTitle></RandomTitle>
         <div>
-            <div class="bless-card">
-                <div class="main">
-                    <div class="content">
-                        {{ content }}
-                    </div>
-                    <div class="avator">
-                        <img :src="avator" alt="avator">
+            <div class="random-card">
+                <div class="wapper-hidder">
+                    <div class="wapper">
+                        <div class="main">
+                            <div class="content">
+                                {{ content }}
+                            </div>
+                            <div class="avator">
+                                <img :src="avator" alt="avator">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,21 +36,21 @@ defineProps({
 </script>
 
 <style>
-.bless-card {
+.random-card {
     width: 100%;
-    background-color: #dc7474;
+    background-color: #eea2a4;
     border-radius: 20px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .25);
 }
 
-.bless-card .main {
+.random-card .main {
     padding: 20px 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.main .avator {
+.random-card .main .avator {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -55,7 +59,7 @@ defineProps({
     padding: 3px;
 }
 
-.main .content {
+.random-card .main .content {
     width: 200px;
     color: #fff;
     text-indent: 2em;

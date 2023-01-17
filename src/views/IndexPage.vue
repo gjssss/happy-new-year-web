@@ -38,7 +38,7 @@ const usrName = ref("")
 
 
 
-axios.get("http://api.godreams.cn/getRom?id=1").then(d => {
+axios.get("http://api.godreams.cn/getWish?id=1").then(d => {
     d = JSON.parse(d.data.data)
     console.log(d);
     content.value = d.wish;
