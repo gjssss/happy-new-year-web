@@ -9,6 +9,7 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import CommentItem from "@/components/widgets/CommentItem.vue"
 defineProps(['data'])

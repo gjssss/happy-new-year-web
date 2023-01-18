@@ -21,6 +21,7 @@
   width: 80vw;
   max-width: 420px;
   margin: auto;
+  z-index: 0;
 }
 
 .container>div {
