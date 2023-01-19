@@ -1,21 +1,22 @@
 <template>
-    <div class="pic-mask" v-if="isShow">
+    <div class="pic-mask" v-if="store.state.isMask">
         <div class="loading" v-if="loading">Loading...</div>
         <div class="pic-container" v-if="!loading"></div>
     </div>
-    <button class="button pic-show-button" @click="loadPic" v-if="!isShow">分享图片</button>
-    <button class="button pic-close-button" @click="unloadPic" v-if="isShow">关闭</button>
+    <button class="button pic-show-button" @click="loadPic" v-if="!store.state.isMask">分享图片</button>
+    <button class="button pic-close-button" @click="unloadPic" v-if="store.state.isMask">关闭</button>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { load } from '@/utils/loadPicture'
+import { useStore } from 'vuex';
 
-const isShow = ref(false);
+const store = useStore()
 const loading = ref(true);
 
 function loadPic() {
-    isShow.value = true;
+    store.commit('swicthMask')
     load(800).then(value => {
         console.log(value);
         if (value == 'done') {
@@ -24,7 +25,7 @@ function loadPic() {
     })
 }
 function unloadPic() {
-    isShow.value = false;
+    store.commit('swicthMask')
     loading.value = true;
 }
 
@@ -32,7 +33,7 @@ function unloadPic() {
 
 <style scoped>
 .pic-mask {
-    background-color: rgba(0, 0, 0, .5);
+    background-color: hsla(0, 0%, 7%, .65);
     width: 100vw;
     height: 100vh;
     position: absolute;

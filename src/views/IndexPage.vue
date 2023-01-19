@@ -2,6 +2,7 @@
     <BlessCard :avator="generateAvator(usrName)" :content="content" />
     <RandomCard :avator="generateAvator(usrName)" :content="content" />
     <UserComment :data="commData" />
+    <SharePicture />
 </template>
 
 <script setup>
@@ -9,6 +10,7 @@ import BlessCard from "@/components/BlessCard.vue"
 import { generateAvator } from "@/utils/avator"
 import UserComment from "@/components/UserComment.vue"
 import RandomCard from "@/components/RandomCard.vue";
+import SharePicture from "@/components/SharePicture.vue";
 import { ref } from "vue"
 
 import axios from 'axios';
@@ -35,8 +37,6 @@ const commData = [{
 }]
 const content = ref("")
 const usrName = ref("")
-
-
 
 axios.get("http://api.godreams.cn/getWish?id=1").then(d => {
     d = JSON.parse(d.data.data)
