@@ -1,8 +1,8 @@
 <template>
+    <SharePicture />
     <BlessCard :avator="generateAvator(usrName)" :content="content" />
     <RandomCard :avator="generateAvator(usrName)" :content="content" />
     <UserComment :data="commData" />
-    <SharePicture />
 </template>
 
 <script setup>
@@ -12,8 +12,9 @@ import UserComment from "@/components/UserComment.vue"
 import RandomCard from "@/components/RandomCard.vue";
 import SharePicture from "@/components/SharePicture.vue";
 import { ref } from "vue"
-
 import axios from 'axios';
+import { useStore } from "vuex";
+
 const commData = [{
     id: 1,
     name: 'wff',
@@ -35,14 +36,20 @@ const commData = [{
     name: 'gjs',
     content: "短句子"
 }]
-const content = ref("")
-const usrName = ref("")
-
-axios.get("http://api.godreams.cn/getWish?id=1").then(d => {
+const content = ref("");
+const usrName = ref("");
+const store = useStore();
+axios.get("http://api.godreams.cn/getWish?id=15").then(d => {
     d = JSON.parse(d.data.data)
     console.log(d);
     content.value = d.wish;
     usrName.value = d.name;
+    store.commit('setUserInfo', {
+        name: d.name,
+        content: d.wish,
+        url: generateAvator(d.name)
+    })
+
 }).catch(e => console.error(e))
 </script>
 

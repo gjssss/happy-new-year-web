@@ -1,7 +1,7 @@
 <template>
     <div class="pic-mask" v-if="store.state.isMask">
         <div class="loading" v-if="loading">Loading...</div>
-        <div class="pic-container" v-if="!loading"></div>
+        <img class="pic" :src="url" v-if="!loading">
     </div>
     <button class="button pic-show-button" @click="loadPic" v-if="!store.state.isMask">分享图片</button>
     <button class="button pic-close-button" @click="unloadPic" v-if="store.state.isMask">关闭</button>
@@ -9,26 +9,26 @@
 
 <script setup>
 import { ref } from 'vue';
-import { load } from '@/utils/loadPicture'
+import { load } from '@/utils/loadPicture';
 import { useStore } from 'vuex';
 
-const store = useStore()
-const loading = ref(true);
+const store = useStore();
+const loading = ref(false);
+const url = ref("");
 
 function loadPic() {
-    store.commit('swicthMask')
-    load(800).then(value => {
-        console.log(value);
-        if (value == 'done') {
+    store.commit('swicthMask');
+    load(store.state.userInfo.name, store.state.userInfo.content, store.state.userInfo.url).then(
+        data => {
             loading.value = false;
+            url.value = data;
         }
-    })
+    )
 }
 function unloadPic() {
-    store.commit('swicthMask')
+    store.commit('swicthMask');
     loading.value = true;
 }
-
 </script>
 
 <style scoped>
@@ -53,10 +53,9 @@ function unloadPic() {
     font-weight: bolder;
 }
 
-.pic-mask .pic-container {
-    width: 85%;
-    height: 85%;
-    background-color: #fff;
+.pic-mask .pic {
+    max-height: 90%;
+    max-width: 85%;
 
     position: absolute;
     top: 50%;

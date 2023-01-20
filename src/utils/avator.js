@@ -3,5 +3,6 @@
  * @returns {String} url
  */
 export function generateAvator(name) {
-    return "http://hellogjs.top:5001/5.x/micah/svg?seed=" + name + "&eyebrows=up,eyelashesUp&mouth=pucker,laughing,smile,smirk,surprised,nervous"
+    // return "http://hellogjs.top:5001/5.x/micah/svg?seed=" + name + "&eyebrows=up,eyelashesUp&mouth=pucker,laughing,smile,smirk,surprised,nervous"
+    return 'http://api.godreams.cn/img?name=ggg'
 }

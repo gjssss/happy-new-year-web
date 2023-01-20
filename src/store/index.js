@@ -20,6 +20,9 @@ export default createStore({
         document.getElementsByTagName('html')[0].style.overflow = ""
       }
     },
+    setUserInfo(state, info) {
+      state.userInfo = info;
+    }
   },
   actions: {
   },
