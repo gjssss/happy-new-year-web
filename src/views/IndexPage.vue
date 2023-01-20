@@ -1,6 +1,6 @@
 <template>
     <SharePicture />
-    <BlessCard :avator="generateAvator(usrName)" :content="content" />
+    <BlessCard :avator="$store.state.userInfo.url" :content="$store.state.userInfo.content" />
     <RandomCard :avator="generateAvator(usrName)" :content="content" />
     <UserComment :data="commData" />
 </template>
@@ -12,38 +12,16 @@ import UserComment from "@/components/UserComment.vue"
 import RandomCard from "@/components/RandomCard.vue";
 import SharePicture from "@/components/SharePicture.vue";
 import { ref } from "vue"
-import axios from 'axios';
 import { useStore } from "vuex";
+import { getWish, getRandomWish, getComments } from "@/utils/axios.js"
 
-const commData = [{
-    id: 1,
-    name: 'wff',
-    content: "喜悦伴着汗水，成功伴着艰辛，遗憾激励奋斗，我们不知不觉地走进了2023年，在新年来临之际，首先我代表信息中心祝各位新年快乐，万事如意! ——gjs"
-}, {
-    id: 3,
-    name: 'wfff',
-    content: "喜悦伴着汗水，成功伴着艰辛，遗憾激励奋斗，我们不知不觉地走进了2023年，在新年来临之际，首先我代表信息中心祝各位新年快乐，万事如意!"
-}, {
-    id: 4,
-    name: 'wffs',
-    content: "喜悦伴着汗水，成功伴着艰辛，遗憾激励奋斗，我们不知不觉地走进了2023年，在新年来临之际，首先我代表信息中心祝各位新年快乐，万事如意!"
-}, {
-    id: 5,
-    name: 'wffa',
-    content: "喜悦伴着汗水，成功伴着艰辛，遗憾激励奋斗，我们不知不觉地走进了2023年，在新年来临之际，首先我代表信息中心祝各位新年快乐，万事如意!"
-}, {
-    id: 2,
-    name: 'gjs',
-    content: "短句子"
-}]
+const commData = ref([])
 const content = ref("");
 const usrName = ref("");
 const store = useStore();
-axios.get("http://api.godreams.cn/getWish?id=15").then(d => {
+
+getWish(15).then(d => {
     d = JSON.parse(d.data.data)
-    console.log(d);
-    content.value = d.wish;
-    usrName.value = d.name;
     store.commit('setUserInfo', {
         name: d.name,
         content: d.wish,
@@ -51,8 +29,16 @@ axios.get("http://api.godreams.cn/getWish?id=15").then(d => {
     })
 
 }).catch(e => console.error(e))
+
+getRandomWish(15).then(d => {
+    d = JSON.parse(d.data.data)
+    content.value = d.wish + "  ——" + d.name;
+    usrName.value = d.name;
+}).catch(e => console.error(e))
+
+getComments(15).then(d => {
+    console.log(d.data.data);
+    commData.value = d.data.data;
+})
+
 </script>
-
-<style>
-
-</style>
