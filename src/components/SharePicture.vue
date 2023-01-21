@@ -2,9 +2,13 @@
     <div class="pic-mask" v-if="store.state.isMask">
         <div class="loading" v-if="loading">Loading...</div>
         <img class="pic" :src="url" v-if="!loading">
+        <div class="share">长按图片保存分享</div>
     </div>
-    <button class="button pic-show-button" @click="loadPic" v-if="!store.state.isMask">分享图片</button>
-    <button class="button pic-close-button" @click="unloadPic" v-if="store.state.isMask">关闭</button>
+    <button class="button pic-show-button" @click="loadPic" v-if="!store.state.isMask"><i
+            class="iconfont icon-fenxiang"></i></button>
+    <button class="button pic-close-button" @click="unloadPic" v-if="store.state.isMask"><i
+            class="iconfont icon-guanbixiao"></i></button>
+
 </template>
 
 <script setup>
@@ -31,7 +35,7 @@ function unloadPic() {
 }
 </script>
 
-<style scoped>
+<style>
 .pic-mask {
     background-color: hsla(0, 0%, 7%, .65);
     width: 100vw;
@@ -64,14 +68,13 @@ function unloadPic() {
 }
 
 .button {
-    background-color: #409eff;
+    background-color: #FF9966;
     margin: 10px 10px;
-    padding: 5px 10px;
+    padding: 8px 8px;
 
     outline: none;
     border: none;
 
-    font-size: 1.1rem;
     color: white;
 
     border-radius: 5px;
@@ -92,5 +95,38 @@ function unloadPic() {
     left: 0;
     top: 0;
     z-index: 1000;
+    background-color: transparent;
+}
+
+@font-face {
+    font-family: "iconfont";
+    /* Project id 3868376 */
+    src: url('//at.alicdn.com/t/c/font_3868376_c1rce9spz3c.woff2?t=1674283116546') format('woff2'),
+        url('//at.alicdn.com/t/c/font_3868376_c1rce9spz3c.woff?t=1674283116546') format('woff'),
+        url('//at.alicdn.com/t/c/font_3868376_c1rce9spz3c.ttf?t=1674283116546') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 24px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fenxiang:before {
+    content: "\e739";
+}
+
+.icon-guanbixiao:before {
+    content: "\e8bb";
+    font-size: 30px;
+}
+
+.share {
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 </style>

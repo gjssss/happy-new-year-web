@@ -1,5 +1,6 @@
 <template>
     <SharePicture />
+    <a href="https://mp.weixin.qq.com/s/wqDLRvB5yihSFQVXFl_GMA"><button class="button again">我也来</button></a>
     <BlessCard :avator="$store.state.userInfo.url" :content="$store.state.userInfo.content" />
     <RandomCard :avator="generateAvator($store.state.randomInfo.name)" :content="$store.state.randomInfo.content" />
     <UserComment :data="$store.state.commentArr" />
@@ -32,6 +33,7 @@ getWish(route.query.id).then(d => {
 getRandomWish(route.query.id).then(d => {
     d = JSON.parse(d.data.data)
     store.commit('setRandomInfo', {
+        id: d.id,
         name: d.name,
         content: d.wish + "  ——来自" + d.area + "的" + d.name
     })
@@ -42,3 +44,12 @@ getComments(route.query.id).then(d => {
 })
 
 </script>
+
+<style>
+.again {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.2em;
+}
+</style>

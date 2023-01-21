@@ -24,8 +24,8 @@ export function getBackground() {
                 crop: {
                     x: 35,
                     y: 35,
-                    width: 300,
-                    height: 300
+                    width: 340,
+                    height: 340
                 }
             });
             backgroundLayer.add(node);

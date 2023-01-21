@@ -3,7 +3,14 @@
         <div class="comment-container">
             <div style="height:100%; padding: 0 10px;">
                 <div class="item-container">
-                    <CommentItem v-for="item in data" :key="item.id" :data-item="item"></CommentItem>
+                    <div v-if="data.length != 0">
+                        <CommentItem v-for="item in data" :key="item.id" :data-item="item"></CommentItem>
+                    </div>
+                    <div v-else class="comment-warning">
+                        暂时还没有评论哦~
+                        <br/>
+                        可以在下面发表评论
+                    </div>
                 </div>
                 <div class="comment-input">
                     <div class="input-style" id="comment" contenteditable :class="{ shakeX: shake[0].value }"></div>
@@ -56,10 +63,10 @@ function valid() {
 
 function submit() {
     if (valid()) {
-        postComments(15, nameN.value, commentN.textContent).then(d => {
+        postComments(store.state.userInfo.id, nameN.value, commentN.textContent).then(d => {
             nameN.value = "";
             commentN.textContent = "";
-            getComments(15).then(d => {
+            getComments(store.state.userInfo.id).then(d => {
                 store.commit('setComments', d.data.data);
             })
         }).catch(e => console.log(e))
@@ -84,7 +91,8 @@ onMounted(() => {
 }
 
 .item-container {
-    height: 400px;
+    max-height: 400px;
+    min-height: 150px;
     overflow: scroll;
     border-bottom: 2px solid rgba(59, 59, 59, 0.322);
     z-index: 10;
@@ -131,6 +139,14 @@ onMounted(() => {
     font-size: 18px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .25);
     color: white;
+}
+
+.comment-warning {
+    text-align: center;
+    font-size: larger;
+    padding: 20px;
+    line-height: 30px;
+    font-weight: 500;
 }
 
 @keyframes shakeX {

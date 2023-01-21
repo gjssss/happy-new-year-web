@@ -9,7 +9,7 @@
                             <div class="content" @click="nextWish">
                                 {{ content }}
                             </div>
-                            <div class="avator">
+                            <div class="avator" @click="jumpRandom">
                                 <img :src="avator" alt="avator">
                             </div>
                         </div>
@@ -36,26 +36,33 @@ import { useStore } from "vuex";
 import { getRandomWish } from '@/utils/axios';
 
 const store = useStore();
+const routeData =
 
-defineProps({
-    content: {
-        type: String,
-        default() { return "新年快乐" }
-    },
-    avator: {
-        type: String,
-        default() { return "https://api.dicebear.com/5.x/micah/svg?seed=gjs&eyebrows=up,eyelashesUp&mouth=pucker,laughing,smile,smirk,surprised,nervous" }
-    }
-})
+    defineProps({
+        content: {
+            type: String,
+            default() { return "新年快乐" }
+        },
+        avator: {
+            type: String,
+            default() { return "https://api.dicebear.com/5.x/micah/svg?seed=gjs&eyebrows=up,eyelashesUp&mouth=pucker,laughing,smile,smirk,surprised,nervous" }
+        }
+    })
 
 function nextWish() {
     getRandomWish(store.state.userInfo.id).then(d => {
         d = JSON.parse(d.data.data)
         store.commit('setRandomInfo', {
+            id: d.id,
             name: d.name,
             content: d.wish + "  ——来自" + d.area + "的" + d.name
         })
     }).catch(e => console.error(e))
+}
+
+function jumpRandom() {
+    location.replace("/#/?id="+store.state.randomInfo.id)
+    location.reload()
 }
 </script>
 
