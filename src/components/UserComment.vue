@@ -24,7 +24,10 @@
 <script setup>
 import CommentItem from "@/components/widgets/CommentItem.vue"
 import { ref, onMounted } from "vue";
-import { postComments } from "@/utils/axios.js"
+import { postComments, getComments } from "@/utils/axios.js"
+import { useStore } from "vuex";
+
+const store = useStore();
 defineProps(['data'])
 
 const shake = [ref(false), ref(false)]
@@ -53,7 +56,13 @@ function valid() {
 
 function submit() {
     if (valid()) {
-        postComments(15, nameN.value, commentN.textContent).then(d => console.log(d)).catch(e=>console.log(e))
+        postComments(15, nameN.value, commentN.textContent).then(d => {
+            nameN.value = "";
+            commentN.textContent = "";
+            getComments(15).then(d => {
+                store.commit('setComments', d.data.data);
+            })
+        }).catch(e => console.log(e))
     }
 }
 onMounted(() => {
@@ -104,6 +113,7 @@ onMounted(() => {
 
 .comment-input .label-text {
     font-size: 20px;
+    color: white;
 }
 
 #name {

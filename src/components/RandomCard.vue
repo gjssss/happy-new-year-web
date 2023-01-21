@@ -6,7 +6,7 @@
                 <div class="wapper-hidder">
                     <div class="wapper">
                         <div class="main">
-                            <div class="content">
+                            <div class="content" @click="nextWish">
                                 {{ content }}
                             </div>
                             <div class="avator">
@@ -16,12 +16,26 @@
                     </div>
                 </div>
             </div>
+            <div class="tip">
+                <span>
+                    点击左侧切换下一跳祝福
+                </span>
+            </div>
+            <div class="tip">
+                <span>
+                    点击头像看看他的祝福
+                </span>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 import RandomTitle from './widgets/RandomTitle.vue';
+import { useStore } from "vuex";
+import { getRandomWish } from '@/utils/axios';
+
+const store = useStore();
 
 defineProps({
     content: {
@@ -33,6 +47,16 @@ defineProps({
         default() { return "https://api.dicebear.com/5.x/micah/svg?seed=gjs&eyebrows=up,eyelashesUp&mouth=pucker,laughing,smile,smirk,surprised,nervous" }
     }
 })
+
+function nextWish() {
+    getRandomWish(store.state.userInfo.id).then(d => {
+        d = JSON.parse(d.data.data)
+        store.commit('setRandomInfo', {
+            name: d.name,
+            content: d.wish + "  ——来自" + d.area + "的" + d.name
+        })
+    }).catch(e => console.error(e))
+}
 </script>
 
 <style>
@@ -65,5 +89,11 @@ defineProps({
     text-indent: 2em;
     margin-right: 5px;
     font-size: 17px;
+}
+
+.tip {
+    text-align: center;
+    font-size: small;
+    color: #5f5f5f;
 }
 </style>

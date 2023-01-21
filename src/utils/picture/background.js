@@ -3,7 +3,7 @@ import { getConfig } from "./config";
 
 export function getBackground() {
     return new Promise((resolve) => {
-        const { width, height } = getConfig()
+        const { width, height, id } = getConfig()
         const backgroundLayer = new Konva.Layer();
 
         backgroundLayer.add(new Konva.Rect({
@@ -15,7 +15,7 @@ export function getBackground() {
             // fill: 'white',
         }));
 
-        Konva.Image.fromURL("http://api.godreams.cn/getQr?id=14", node => {
+        Konva.Image.fromURL("http://api.godreams.cn/getQr?id=" + id, node => {
             node.setAttrs({
                 x: 30,
                 y: height - 120,

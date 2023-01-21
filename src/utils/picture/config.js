@@ -1,7 +1,8 @@
 
 let instance = {
     name: 'ggg',
-    content: ''
+    content: '',
+    id: 15
 }
 
 export function getConfig() {
@@ -36,6 +37,7 @@ export function getConfig() {
         wishText: wishText,
         wish: wish,
         content: content,
+        id: instance.id
     }
 }
 export function setName(name) {
@@ -43,4 +45,7 @@ export function setName(name) {
 }
 export function setContent(content) {
     instance.content = content;
+}
+export function setId(id) {
+    instance.id = id;
 }

@@ -18,7 +18,7 @@ const url = ref("");
 
 function loadPic() {
     store.commit('swicthMask');
-    load(store.state.userInfo.name, store.state.userInfo.content, store.state.userInfo.url).then(
+    load(store.state.userInfo.name, store.state.userInfo.content, store.state.userInfo.id).then(
         data => {
             loading.value = false;
             url.value = data;

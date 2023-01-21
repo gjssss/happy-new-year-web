@@ -1,8 +1,8 @@
 <template>
     <SharePicture />
     <BlessCard :avator="$store.state.userInfo.url" :content="$store.state.userInfo.content" />
-    <RandomCard :avator="generateAvator(usrName)" :content="content" />
-    <UserComment :data="commData" />
+    <RandomCard :avator="generateAvator($store.state.randomInfo.name)" :content="$store.state.randomInfo.content" />
+    <UserComment :data="$store.state.commentArr" />
 </template>
 
 <script setup>
@@ -11,18 +11,17 @@ import { generateAvator } from "@/utils/avator"
 import UserComment from "@/components/UserComment.vue"
 import RandomCard from "@/components/RandomCard.vue";
 import SharePicture from "@/components/SharePicture.vue";
-import { ref } from "vue"
 import { useStore } from "vuex";
 import { getWish, getRandomWish, getComments } from "@/utils/axios.js"
+import { useRoute } from "vue-router";
 
-const commData = ref([])
-const content = ref("");
-const usrName = ref("");
 const store = useStore();
+const route = useRoute();
 
-getWish(15).then(d => {
+getWish(route.query.id).then(d => {
     d = JSON.parse(d.data.data)
     store.commit('setUserInfo', {
+        id: route.query.id,
         name: d.name,
         content: d.wish,
         url: generateAvator(d.name)
@@ -30,15 +29,16 @@ getWish(15).then(d => {
 
 }).catch(e => console.error(e))
 
-getRandomWish(15).then(d => {
+getRandomWish(route.query.id).then(d => {
     d = JSON.parse(d.data.data)
-    content.value = d.wish + "  ——" + d.name;
-    usrName.value = d.name;
+    store.commit('setRandomInfo', {
+        name: d.name,
+        content: d.wish + "  ——来自" + d.area + "的" + d.name
+    })
 }).catch(e => console.error(e))
 
-getComments(15).then(d => {
-    console.log(d.data.data);
-    commData.value = d.data.data;
+getComments(route.query.id).then(d => {
+    store.commit('setComments', d.data.data);
 })
 
 </script>
