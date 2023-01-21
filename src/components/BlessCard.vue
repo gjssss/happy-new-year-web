@@ -1,18 +1,22 @@
 <template>
     <div>
         <div class="bless-card">
-            <div class="main">
-                <div class="avator">
-                    <img :src="avator" alt="avator">
-                </div>
-                <div class="content">
-                    {{ content }}
-                </div>
-                <div class="deco">
-                    <div class="pao">
-                        <div class="dot" />
-                        <img src="@/assets/鞭炮.png" class="pao-img" />
+            <div class="wapper-hidder">
+                <div class="wapper">
+                    <div class="main">
+                        <div class="avator">
+                            <img :src="avator" alt="avator">
+                        </div>
+                        <div class="content">
+                            {{ content }}
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="deco">
+                <div class="pao">
+                    <div class="dot" />
+                    <img src="@/assets/鞭炮.png" class="pao-img" />
                 </div>
             </div>
         </div>
@@ -37,9 +41,21 @@ defineProps({
 <style>
 .bless-card {
     width: 100%;
-    background-color: #dc7474;
+    background-color: #ed5a65;
     border-radius: 20px 8px 20px 8px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .25);
+}
+
+.wapper-hidder {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.wapper {
+    width: 100%;
+    height: 100%;
+    background-image: url("http://zhongguose.com/img/texture.png");
+    z-index: 9;
 }
 
 .bless-card .main {
@@ -70,11 +86,13 @@ defineProps({
     position: absolute;
     width: 80vw;
     max-width: 420px;
+    transform: translateY(-100%);
 }
 
 .pao {
+    width:50px;
     float: right;
-    transform: translate(50%);
+    transform: translateX(25px);
 }
 
 .pao .dot {
